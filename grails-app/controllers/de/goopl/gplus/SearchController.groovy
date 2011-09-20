@@ -15,7 +15,7 @@ class SearchController {
 
         def model = []
         println params
-        def users = User.findAllByBeruf(params.jobDescription.toString().ignoreCase())
+        def users = User.findAllByJobDescription(params.jobDescription.toString().ignoreCase())
 
         users.each {
             def str = "https://www.googleapis.com/plus/v1/people/${it.googleId}?key=AIzaSyBplZkLayLfEY556fgQNWtfB3n5-gDWqfk"
