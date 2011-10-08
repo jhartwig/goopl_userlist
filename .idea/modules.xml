@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/goopl_userlist.iml" filepath="$PROJECT_DIR$/goopl_userlist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/goopl_userlist-grailsPlugins.iml" filepath="$PROJECT_DIR$/goopl_userlist-grailsPlugins.iml" />
     </modules>
   </component>
 </project>

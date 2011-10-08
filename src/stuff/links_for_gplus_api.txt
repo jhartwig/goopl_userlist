@@ -1,0 +1,6 @@
+docu@google
+
+https://developers.google.com/+/api/
+
+people: http://googleplusplatform.blogspot.com/2011/09/getting-started-on-google-api.html
+activities/people search: http://googleplusplatform.blogspot.com/2011/10/google-apis-now-with-search-and-more.html

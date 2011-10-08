@@ -1,0 +1,38 @@
+{
+    "kind": "plus#person",
+    "id": "103536047065272654630",
+    "displayName": "Jan Hartwig",
+    "tagline": "ich halt",
+    "gender": "male",
+    "aboutMe": "Programmierung in Groovy/Grails",
+    "url": "https://plus.google.com/103536047065272654630",
+    "image": {
+        "url": "https://lh5.googleusercontent.com/-NxjKxggnxL8/AAAAAAAAAAI/AAAAAAAABHo/nfZFuXZ3dFQ/photo.jpg"
+    },
+    "urls": [
+        {
+            "value": "http://www.goopl.de/"
+        },
+        {
+            "value": "http://twitter.com/#!/goopl_de"
+        },
+        {
+            "value": "http://www.facebook.com/GooPl.de"
+        },
+        {
+            "value": "https://plus.google.com/103536047065272654630",
+            "type": "profile"
+        },
+        {
+            "value": "https://www.googleapis.com/plus/v1/people/103536047065272654630",
+            "type": "json"
+        }
+    ],
+    "organizations": [
+        {
+            "name": "Affinitas GmbH",
+            "title": "Entwicklung mit Groovy/Grails",
+            "type": "work"
+        }
+    ]
+}

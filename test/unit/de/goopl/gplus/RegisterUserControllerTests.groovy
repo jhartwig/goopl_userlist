@@ -5,8 +5,8 @@ import grails.test.mixin.TestFor
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(SearchController)
-class SearchControllerTests {
+@TestFor(RegisterUserController)
+class RegisterUserControllerTests {
 
     void testSomething() {
 

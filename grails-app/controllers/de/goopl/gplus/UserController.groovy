@@ -2,5 +2,5 @@ package de.goopl.gplus
 
 class UserController {
 
-    static scaffold = true
+    static scaffold = true       // TODO:
 }

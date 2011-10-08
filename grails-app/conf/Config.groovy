@@ -10,6 +10,15 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+switch(grails.util.GrailsUtil.getEnvironment()){
+	case org.codehaus.groovy.grails.commons.GrailsApplication.ENV_DEVELOPMENT:
+		grails.config.locations = [ "file:${basedir}/src/resources/props/${System.getenv('USER')}.properties"]
+		break
+	default:
+		grails.config.locations = [ "classpath:${appName}-config.properties"]
+		break
+}
+println "grails.config.locations: ${grails.config.locations}"
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -88,5 +97,3 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-jobDescriptions = ["Webentwickler", "Architekt", "Müllfahrer"]
