@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: jan
-  Date: 16.09.11
-  Time: 14:23
+  Date: 26.09.11
+  Time: 19:26
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -10,5 +10,9 @@
 <html>
   <head><title>Simple GSP page</title></head>
   <body>Place your content here</body>
-    ${model}
+%{--app.version=${metadata.'app.version'}--}%
+<g:form name="myForm" action="loadGoogleProfile">
+    <g:textField name="gpId" />
+    <g:submitButton name="add" value="Hinzufügen"/>
+</g:form>
 </html>

@@ -4,9 +4,9 @@ import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import javax.servlet.http.HttpServletResponse
 
-@TestFor(UserController)
-@Mock(User)
-class UserControllerTests {
+@TestFor(ActivityTraceController)
+@Mock(ActivityTrace)
+class ActivityTraceControllerTests {
 
 
     def populateValidParams(params) {
@@ -17,21 +17,21 @@ class UserControllerTests {
 
     void testIndex() {
         controller.index()
-        assert "/user/list" == response.redirectedUrl
+        assert "/activityTrace/list" == response.redirectedUrl
     }
 
     void testList() {
 
         def model = controller.list()
 
-        assert model.userInstanceList.size() == 0
-        assert model.userInstanceTotal == 0
+        assert model.activityTraceInstanceList.size() == 0
+        assert model.activityTraceInstanceTotal == 0
     }
 
     void testCreate() {
        def model = controller.create()
 
-       assert model.userInstance != null
+       assert model.activityTraceInstance != null
     }
 
     void testSave() {
@@ -42,55 +42,55 @@ class UserControllerTests {
         request.method = 'POST'
         controller.save()
 
-        assert model.userInstance != null
-        assert view == '/user/create'
+        assert model.activityTraceInstance != null
+        assert view == '/activityTrace/create'
 
         response.reset()
 
         populateValidParams(params)
         controller.save()
 
-        assert response.redirectedUrl == '/user/show/1'
+        assert response.redirectedUrl == '/activityTrace/show/1'
         assert controller.flash.message != null
-        assert User.count() == 1
+        assert ActivityTrace.count() == 1
     }
 
     void testShow() {
         controller.show()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/user/list'
+        assert response.redirectedUrl == '/activityTrace/list'
 
 
         populateValidParams(params)
-        def user = new User(params)
+        def activityTrace = new ActivityTrace(params)
 
-        assert user.save() != null
+        assert activityTrace.save() != null
 
-        params.id = user.id
+        params.id = activityTrace.id
 
         def model = controller.show()
 
-        assert model.userInstance == user
+        assert model.activityTraceInstance == activityTrace
     }
 
     void testEdit() {
         controller.edit()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/user/list'
+        assert response.redirectedUrl == '/activityTrace/list'
 
 
         populateValidParams(params)
-        def user = new User(params)
+        def activityTrace = new ActivityTrace(params)
 
-        assert user.save() != null
+        assert activityTrace.save() != null
 
-        params.id = user.id
+        params.id = activityTrace.id
 
         def model = controller.edit()
 
-        assert model.userInstance == user
+        assert model.activityTraceInstance == activityTrace
     }
 
     void testUpdate() {
@@ -103,45 +103,45 @@ class UserControllerTests {
         controller.update()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/user/list'
+        assert response.redirectedUrl == '/activityTrace/list'
 
         response.reset()
 
 
         populateValidParams(params)
-        def user = new User(params)
+        def activityTrace = new ActivityTrace(params)
 
-        assert user.save() != null
+        assert activityTrace.save() != null
 
         // test invalid parameters in update
-        params.id = user.id
+        params.id = activityTrace.id
         //TODO: add invalid values to params object
 
         controller.update()
 
-        assert view == "/user/edit"
-        assert model.userInstance != null
+        assert view == "/activityTrace/edit"
+        assert model.activityTraceInstance != null
 
-        user.clearErrors()
+        activityTrace.clearErrors()
 
         populateValidParams(params)
         controller.update()
 
-        assert response.redirectedUrl == "/user/show/$user.id"
+        assert response.redirectedUrl == "/activityTrace/show/$activityTrace.id"
         assert flash.message != null
 
         //test outdated version number
         response.reset()
-        user.clearErrors()
+        activityTrace.clearErrors()
 
         populateValidParams(params)
-        params.id = user.id
+        params.id = activityTrace.id
         params.version = -1
         controller.update()
 
-        assert view == "/user/edit"
-        assert model.userInstance != null
-        assert model.userInstance.errors.getFieldError('version')
+        assert view == "/activityTrace/edit"
+        assert model.activityTraceInstance != null
+        assert model.activityTraceInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 
@@ -153,22 +153,22 @@ class UserControllerTests {
         request.method = 'POST'
         controller.delete()
         assert flash.message != null
-        assert response.redirectedUrl == '/user/list'
+        assert response.redirectedUrl == '/activityTrace/list'
 
         response.reset()
 
         populateValidParams(params)
-        def user = new User(params)
+        def activityTrace = new ActivityTrace(params)
 
-        assert user.save() != null
-        assert User.count() == 1
+        assert activityTrace.save() != null
+        assert ActivityTrace.count() == 1
 
-        params.id = user.id
+        params.id = activityTrace.id
 
         controller.delete()
 
-        assert User.count() == 0
-        assert User.get(user.googleId) == null
-        assert response.redirectedUrl == '/user/list'
+        assert ActivityTrace.count() == 0
+        assert ActivityTrace.get(activityTrace.id) == null
+        assert response.redirectedUrl == '/activityTrace/list'
     }
 }
