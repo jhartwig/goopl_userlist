@@ -27,17 +27,25 @@ environments {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:prodDb"
-            // For MySQL production scenarios enable the following settings
-//          pooled = true
-//          properties {
-//               minEvictableIdleTimeMillis=1800000
-//               timeBetweenEvictionRunsMillis=1800000
-//               numTestsPerEvictionRun=3
-//               testOnBorrow=true
-//               testWhileIdle=true
-//               testOnReturn=true
-//               validationQuery="SELECT 1"
-//          }
         }
+//        dataSource {
+//            dbCreate = "update"
+//            // For MySQL production scenarios enable the following settings
+//            url = "jdbc:mysql://localhost/userlist"
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+//            username = "n/a"
+//            password = "n/a"
+//            pooled = true
+////            properties {
+////               minEvictableIdleTimeMillis=1800000
+////               timeBetweenEvictionRunsMillis=1800000
+////               numTestsPerEvictionRun=3
+////               testOnBorrow=true
+////               testWhileIdle=true
+////               testOnReturn=true
+////               validationQuery="SELECT 1"
+////            }
+//        }
     }
 }

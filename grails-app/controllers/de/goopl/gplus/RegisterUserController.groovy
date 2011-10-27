@@ -10,14 +10,14 @@ class RegisterUserController {
 
     def loadGoogleProfile() {
         // todo: try catch
-
         def str = gplusApiService.getPeople(params.gpId) // TODO: params with command
         def userInfo = JSON.parse(str?.toURL()?.getText())
 
         def createUserAndReturnHim = {
             userInfo << [googleId: userInfo.id]
             def user = new User(userInfo)
-            if (user.save()) {
+            if (user.save(flush: true, failOnError: true)) {
+                rabbitSend 'search.sync', '', "${user.id}:${user.class.name}"
                 log.info "[] created user with id[$userInfo.id]"
                 return user
             } else { user.errors.allErrors.each { log.warn it } }
@@ -27,7 +27,8 @@ class RegisterUserController {
             def user = User.findByGoogleId(userInfo.id)
             if (user) {
                 userInfo.each {(it.key == "id") ? (user?.googleId = it.value) : (user[it.key] = it.value)}
-                if (user.save()) {
+                if (user.save(flush: true, failOnError: true)) {
+                    rabbitSend 'search.sync', '', "${user.id}:${user.class.name}"
                     log.info "[] updated user from google with id[$userInfo.id]"
                     return user
                 } else { user.errors.allErrors.each { log.warn it } }
@@ -39,7 +40,7 @@ class RegisterUserController {
         model.user = getUserFromDbAndUpdate() ?: createUserAndReturnHim()
         model.jobs = Job.list(sort: "jobDescription", order: "asc")
 
-        [model: model]  // TODO: which data from google
+        render(new JSON([model])).toString() //[model: model]  // TODO: which data from google
     }
 
     def saveProfileToDb() {
@@ -58,11 +59,13 @@ class RegisterUserController {
         else if (params.update) {
             user.aboutMe = params.aboutMe
             user.skills = params.jobs.collect {Job.get(it).jobDescription}.join(", ")
-            user.jobStatus = "verfügbar" // TODO, remove just for testing, need some stuff for internationalization
-            if (user.save()) { log.info "[] updated user from gui with id[$params.gpId]" }
+            if (user.save(flush: true, failOnError: true)) {
+                rabbitSend 'search.sync', '', "${user.id}:${user.class.name}"
+                log.info "[] updated user from gui with id[$params.gpId]"
+            }
             else { user.errors.allErrors.each { log.warn it } }
 
-            redirect controller: 'searchable'
+            redirect controller: 'searchable', params: ["java"]
         }
     }
 }

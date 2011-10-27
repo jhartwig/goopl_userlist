@@ -10,6 +10,7 @@
 <html>
   <head><title>Simple GSP page</title></head>
   <body>Place your content here</body>
+%{--app.version=${metadata.'app.version'}--}%
 <g:form name="myForm" action="loadGoogleProfile">
     <g:textField name="gpId" />
     <g:submitButton name="add" value="Hinzufügen"/>

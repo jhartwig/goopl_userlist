@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="default" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="@log4j.log.basedir@/userlist.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="@log4j.appender.conversion.pattern@"/>
+        </layout>
+    </appender>
+
+    <logger name="org.codehaus.groovy" additivity="false">
+        <level value="@log4j.org.codehaus.groovy@"/>
+        <appender-ref ref="default"/>
+    </logger>
+
+    <logger name="grails" additivity="false">
+        <level value="@log4j.grails@"/>
+        <appender-ref ref="default"/>
+    </logger>
+
+    <logger name="org.springframework" additivity="false">
+        <level value="@log4j.org.springframework@"/>
+        <appender-ref ref="default"/>
+    </logger>
+
+    <logger name="grails.plugin.springcache" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="default"/>
+    </logger>
+
+    <root>
+        <priority value="@log4j.root.priority@"/>
+        <appender-ref ref="default"/>
+    </root>
+</log4j:configuration>
